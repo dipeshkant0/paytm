@@ -38,11 +38,11 @@ const userSchema = mongoose.Schema({
      timestamps: true,
  })
 
-userSchema.pre("save",async (next )=>{
-     if(!this.isModified("password")) return next();
-     const saltRounds =10
+userSchema.pre('save', async function(next){
+     if (!(this.isModified("password"))) return next();
+     const saltRounds = 10;
      const salt = await bcrypt.genSalt(saltRounds);
-     await bcrypt.hash(this.password,salt);
+     this.password = await bcrypt.hash(this.password,salt);
      next();
 })
 
