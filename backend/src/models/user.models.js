@@ -53,7 +53,7 @@ userSchema.methods.isPasswordCorrect = async function(password){
 userSchema.methods.generateAccesstoken = async function(){
      try {
          return  Jwt.sign(
-                              {
+                              {    _id: this._id,
                                    username: this.username,
                                    email: this.email,
                               },
